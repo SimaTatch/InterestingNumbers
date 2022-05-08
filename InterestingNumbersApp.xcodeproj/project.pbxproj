@@ -10,12 +10,30 @@
 		926178BA2826C7BE00F2206C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926178B92826C7BE00F2206C /* AppDelegate.swift */; };
 		926178BC2826C7BE00F2206C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926178BB2826C7BE00F2206C /* SceneDelegate.swift */; };
 		926178BE2826C7BE00F2206C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926178BD2826C7BE00F2206C /* ViewController.swift */; };
-		926178C12826C7BE00F2206C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926178BF2826C7BE00F2206C /* Main.storyboard */; };
 		926178C32826C7BF00F2206C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926178C22826C7BF00F2206C /* Assets.xcassets */; };
 		926178C62826C7BF00F2206C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926178C42826C7BF00F2206C /* LaunchScreen.storyboard */; };
 		926178D12826C7BF00F2206C /* InterestingNumbersAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926178D02826C7BF00F2206C /* InterestingNumbersAppTests.swift */; };
 		926178DB2826C7BF00F2206C /* InterestingNumbersAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926178DA2826C7BF00F2206C /* InterestingNumbersAppUITests.swift */; };
 		926178DD2826C7BF00F2206C /* InterestingNumbersAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926178DC2826C7BF00F2206C /* InterestingNumbersAppUITestsLaunchTests.swift */; };
+		926178F62826C8E900F2206C /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178EA2826C8E900F2206C /* OpenSans-SemiBold.ttf */; };
+		926178F72826C8E900F2206C /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178EB2826C8E900F2206C /* OpenSans-Light.ttf */; };
+		926178F82826C8E900F2206C /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178EC2826C8E900F2206C /* OpenSans-Italic.ttf */; };
+		926178F92826C8E900F2206C /* OpenSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178ED2826C8E900F2206C /* OpenSans-MediumItalic.ttf */; };
+		926178FA2826C8E900F2206C /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178EE2826C8E900F2206C /* OpenSans-ExtraBold.ttf */; };
+		926178FB2826C8E900F2206C /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178EF2826C8E900F2206C /* OpenSans-LightItalic.ttf */; };
+		926178FC2826C8E900F2206C /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178F02826C8E900F2206C /* OpenSans-Bold.ttf */; };
+		926178FD2826C8E900F2206C /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178F12826C8E900F2206C /* OpenSans-SemiBoldItalic.ttf */; };
+		926178FE2826C8E900F2206C /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178F22826C8E900F2206C /* OpenSans-Medium.ttf */; };
+		926178FF2826C8E900F2206C /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178F32826C8E900F2206C /* OpenSans-ExtraBoldItalic.ttf */; };
+		926179002826C8E900F2206C /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178F42826C8E900F2206C /* OpenSans-Regular.ttf */; };
+		926179012826C8E900F2206C /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926178F52826C8E900F2206C /* OpenSans-BoldItalic.ttf */; };
+		926179042826E52800F2206C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926179032826E52800F2206C /* UIColor+Extensions.swift */; };
+		926179062826E61D00F2206C /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926179052826E61D00F2206C /* UIFont+Extension.swift */; };
+		9261790828272BE300F2206C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261790728272BE300F2206C /* NetworkService.swift */; };
+		9261790A2827409900F2206C /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926179092827409900F2206C /* UIView+Extensions.swift */; };
+		9261790C2827D19600F2206C /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261790B2827D19600F2206C /* SearchResults.swift */; };
+		9261790E2827E11900F2206C /* FactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261790D2827E11900F2206C /* FactViewController.swift */; };
+		926179112827F9B600F2206C /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926179102827F9B600F2206C /* NetworkDataFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +58,6 @@
 		926178B92826C7BE00F2206C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		926178BB2826C7BE00F2206C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		926178BD2826C7BE00F2206C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		926178C02826C7BE00F2206C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		926178C22826C7BF00F2206C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		926178C52826C7BF00F2206C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		926178C72826C7BF00F2206C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +66,25 @@
 		926178D62826C7BF00F2206C /* InterestingNumbersAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterestingNumbersAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		926178DA2826C7BF00F2206C /* InterestingNumbersAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestingNumbersAppUITests.swift; sourceTree = "<group>"; };
 		926178DC2826C7BF00F2206C /* InterestingNumbersAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestingNumbersAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		926178EA2826C8E900F2206C /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		926178EB2826C8E900F2206C /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		926178EC2826C8E900F2206C /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		926178ED2826C8E900F2206C /* OpenSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		926178EE2826C8E900F2206C /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		926178EF2826C8E900F2206C /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		926178F02826C8E900F2206C /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		926178F12826C8E900F2206C /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		926178F22826C8E900F2206C /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Medium.ttf"; sourceTree = "<group>"; };
+		926178F32826C8E900F2206C /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		926178F42826C8E900F2206C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		926178F52826C8E900F2206C /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		926179032826E52800F2206C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		926179052826E61D00F2206C /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		9261790728272BE300F2206C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		926179092827409900F2206C /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		9261790B2827D19600F2206C /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		9261790D2827E11900F2206C /* FactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactViewController.swift; sourceTree = "<group>"; };
+		926179102827F9B600F2206C /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +137,14 @@
 			children = (
 				926178B92826C7BE00F2206C /* AppDelegate.swift */,
 				926178BB2826C7BE00F2206C /* SceneDelegate.swift */,
-				926178BD2826C7BE00F2206C /* ViewController.swift */,
-				926178BF2826C7BE00F2206C /* Main.storyboard */,
+				926179122827FA4600F2206C /* Service */,
+				9261791328280C4E00F2206C /* Controllers */,
+				9261791428280C6000F2206C /* Model */,
+				926179022826E4F800F2206C /* Extensions */,
 				926178C22826C7BF00F2206C /* Assets.xcassets */,
 				926178C42826C7BF00F2206C /* LaunchScreen.storyboard */,
 				926178C72826C7BF00F2206C /* Info.plist */,
+				926178E92826C8E900F2206C /* OpenSans */,
 			);
 			path = InterestingNumbersApp;
 			sourceTree = "<group>";
@@ -125,6 +164,61 @@
 				926178DC2826C7BF00F2206C /* InterestingNumbersAppUITestsLaunchTests.swift */,
 			);
 			path = InterestingNumbersAppUITests;
+			sourceTree = "<group>";
+		};
+		926178E92826C8E900F2206C /* OpenSans */ = {
+			isa = PBXGroup;
+			children = (
+				926178EA2826C8E900F2206C /* OpenSans-SemiBold.ttf */,
+				926178EB2826C8E900F2206C /* OpenSans-Light.ttf */,
+				926178EC2826C8E900F2206C /* OpenSans-Italic.ttf */,
+				926178ED2826C8E900F2206C /* OpenSans-MediumItalic.ttf */,
+				926178EE2826C8E900F2206C /* OpenSans-ExtraBold.ttf */,
+				926178EF2826C8E900F2206C /* OpenSans-LightItalic.ttf */,
+				926178F02826C8E900F2206C /* OpenSans-Bold.ttf */,
+				926178F12826C8E900F2206C /* OpenSans-SemiBoldItalic.ttf */,
+				926178F22826C8E900F2206C /* OpenSans-Medium.ttf */,
+				926178F32826C8E900F2206C /* OpenSans-ExtraBoldItalic.ttf */,
+				926178F42826C8E900F2206C /* OpenSans-Regular.ttf */,
+				926178F52826C8E900F2206C /* OpenSans-BoldItalic.ttf */,
+			);
+			path = OpenSans;
+			sourceTree = "<group>";
+		};
+		926179022826E4F800F2206C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				926179032826E52800F2206C /* UIColor+Extensions.swift */,
+				926179052826E61D00F2206C /* UIFont+Extension.swift */,
+				926179092827409900F2206C /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		926179122827FA4600F2206C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9261790728272BE300F2206C /* NetworkService.swift */,
+				926179102827F9B600F2206C /* NetworkDataFetcher.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		9261791328280C4E00F2206C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				926178BD2826C7BE00F2206C /* ViewController.swift */,
+				9261790D2827E11900F2206C /* FactViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9261791428280C6000F2206C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9261790B2827D19600F2206C /* SearchResults.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,8 +326,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				926178C62826C7BF00F2206C /* LaunchScreen.storyboard in Resources */,
+				926178F62826C8E900F2206C /* OpenSans-SemiBold.ttf in Resources */,
+				926178FA2826C8E900F2206C /* OpenSans-ExtraBold.ttf in Resources */,
+				926178F72826C8E900F2206C /* OpenSans-Light.ttf in Resources */,
+				926178FD2826C8E900F2206C /* OpenSans-SemiBoldItalic.ttf in Resources */,
+				926178F82826C8E900F2206C /* OpenSans-Italic.ttf in Resources */,
+				926178FC2826C8E900F2206C /* OpenSans-Bold.ttf in Resources */,
+				926178FF2826C8E900F2206C /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				926178F92826C8E900F2206C /* OpenSans-MediumItalic.ttf in Resources */,
+				926178FE2826C8E900F2206C /* OpenSans-Medium.ttf in Resources */,
+				926179012826C8E900F2206C /* OpenSans-BoldItalic.ttf in Resources */,
+				926178FB2826C8E900F2206C /* OpenSans-LightItalic.ttf in Resources */,
+				926179002826C8E900F2206C /* OpenSans-Regular.ttf in Resources */,
 				926178C32826C7BF00F2206C /* Assets.xcassets in Resources */,
-				926178C12826C7BE00F2206C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +363,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9261790E2827E11900F2206C /* FactViewController.swift in Sources */,
+				9261790A2827409900F2206C /* UIView+Extensions.swift in Sources */,
 				926178BE2826C7BE00F2206C /* ViewController.swift in Sources */,
 				926178BA2826C7BE00F2206C /* AppDelegate.swift in Sources */,
+				926179112827F9B600F2206C /* NetworkDataFetcher.swift in Sources */,
 				926178BC2826C7BE00F2206C /* SceneDelegate.swift in Sources */,
+				926179062826E61D00F2206C /* UIFont+Extension.swift in Sources */,
+				9261790828272BE300F2206C /* NetworkService.swift in Sources */,
+				9261790C2827D19600F2206C /* SearchResults.swift in Sources */,
+				926179042826E52800F2206C /* UIColor+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +409,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		926178BF2826C7BE00F2206C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				926178C02826C7BE00F2206C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		926178C42826C7BF00F2206C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -444,7 +548,7 @@
 				INFOPLIST_FILE = InterestingNumbersApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -456,7 +560,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -472,7 +576,7 @@
 				INFOPLIST_FILE = InterestingNumbersApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -484,7 +588,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
