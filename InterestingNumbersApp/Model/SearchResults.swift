@@ -1,9 +1,3 @@
-//
-//  SearchResults.swift
-//  InterestingNumbersApp
-//
-//  Created by Серафима  Татченкова  on 08.05.2022.
-//
 
 import Foundation
 

@@ -1,32 +1,25 @@
-//
-//  FactViewController.swift
-//  InterestingNumbersApp
-//
-//  Created by Серафима  Татченкова  on 08.05.2022.
-//
 
 import Foundation
 import UIKit
 
 class FactViewController: UIViewController, ViewControllerCustomDelegate {
     
+    //    MARK: - Conform to protocol
     func factAbout(number: Int) {
         DispatchQueue.main.async {
             self.numberLabel.text = String(number)
         }
     }
-    
-    
     func numberFact(fact: String) {
         DispatchQueue.main.async {
             self.factLabel.text = fact
         }
     }
     
-    
+    //    MARK: - SetupUIs
     private let numberLabel: UILabel = {
         let label = UILabel()
-//        label.text = "100000"
+        //        label.text = "100000"
         label.textAlignment = .center
         label.font = .openSansBold28()
         label.textColor = .white
@@ -41,7 +34,7 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
     
     private let factLabel: UILabel = {
         let label = UILabel()
-//        label.text = "The word \"hundred\" is actually derived from the Old Norse word \"hundrath,\" which actually means 120, not 100. More specifically, \"hundrath,\" in Old Norse, means \"long hundred,\" which equals 120, due to the duodecimal system. But good luck trying to argue that your $100 bill is worth 20 percent more than it is."
+        //        label.text = "The word \"hundred\" is actually derived from the Old Norse word \"hundrath,\" which actually means 120, not 100. More specifically, \"hundrath,\" in Old Norse, means \"long hundred,\" which equals 120, due to the duodecimal system. But good luck trying to argue that your $100 bill is worth 20 percent more than it is."
         label.font = .openSansSemiBold16()
         label.textAlignment = .center
         label.textColor = .white
@@ -56,23 +49,25 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
     private let exitButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "close"), for: .normal)
-//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(exitButtonIsPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    
+    //    MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
     }
     
+    //  MARK: - Objective-c funcs
     @objc func exitButtonIsPressed(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    //    MARK: - Private funcs
     private func setupViews() {
         view.backgroundColor = .specialPurple
         view.addSubview(factLabel)
@@ -80,8 +75,11 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
         view.addSubview(exitButton)
     }
 }
+
+
 extension FactViewController {
     
+    //    MARK: - SetupConstraints
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([

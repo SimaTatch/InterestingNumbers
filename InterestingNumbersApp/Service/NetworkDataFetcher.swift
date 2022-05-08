@@ -1,9 +1,4 @@
-//
-//  NetworkDataFetcher.swift
-//  InterestingNumbersApp
-//
-//  Created by Серафима  Татченкова  on 08.05.2022.
-//
+
 
 import Foundation
 
@@ -20,7 +15,7 @@ class NetworkDataFetcher {
             }
             let decode = self.decodeJSON(type: SearchResultsDateJSON.self, from: data)
             completion(decode)
-//            print(decode)
+            print(decode)
         }
     }
     

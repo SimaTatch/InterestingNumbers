@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  InterestingNumbersApp
-//
-//  Created by Серафима  Татченкова  on 07.05.2022.
-//
 
 import UIKit
 
@@ -123,12 +117,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     @objc func displayFactButtonIsPressed(sender: UIButton!) {
         let navController = UINavigationController(rootViewController: FactViewController())
+        
         self.networkDataFetcher.fetchFacts(number: enterHereTextField.text ?? "", type: "math") { [weak self] (result) in
             DispatchQueue.main.async {
                 self?.delegate?.numberFact(fact: result?.text ?? "")
                 self?.delegate?.factAbout(number: result?.number ?? 0)
             }
         }
+        enterHereTextField.resignFirstResponder()
         self.present(navController, animated: true, completion: nil)
     }
     

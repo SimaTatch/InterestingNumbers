@@ -1,9 +1,3 @@
-//
-//  UIFont+Extension.swift
-//  InterestingNumbersApp
-//
-//  Created by Серафима  Татченкова  on 07.05.2022.
-//
 
 import Foundation
 import UIKit
@@ -32,5 +26,4 @@ extension UIFont {
     static func openSansSemiBold16() -> UIFont? {
         return UIFont.init(name: "OpenSans-SemiBold", size: 16)
     }
-    
 }
