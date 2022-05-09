@@ -4,15 +4,15 @@ import UIKit
 
 class FactViewController: UIViewController, ViewControllerCustomDelegate {
     
-    //    MARK: - Conform to protocol
+    var networkDataFetcher = NetworkDataFetcher()
+    
+//    var fetchedNumber: Int?
+
+    
+    //    MARK: - Conformity to protocol
     func factAbout(number: Int) {
         DispatchQueue.main.async {
             self.numberLabel.text = String(number)
-        }
-    }
-    func numberFact(fact: String) {
-        DispatchQueue.main.async {
-            self.factLabel.text = fact
         }
     }
     
@@ -60,6 +60,9 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        self.networkDataFetcher.fetchFacts(number: numberLabel.text ?? "0", type: "math") { (result) in
+            self.factLabel.text = result?.text
+        }
     }
     
     //  MARK: - Objective-c funcs

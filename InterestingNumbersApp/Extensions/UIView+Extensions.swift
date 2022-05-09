@@ -1,9 +1,3 @@
-//
-//  UIView+Extensions.swift
-//  InterestingNumbersApp
-//
-//  Created by Серафима  Татченкова  on 08.05.2022.
-//
 
 import Foundation
 import UIKit
@@ -16,5 +10,4 @@ extension UIView {
         layer.shadowOpacity = 1.0
         layer.shadowRadius = 4
     }
-
 }

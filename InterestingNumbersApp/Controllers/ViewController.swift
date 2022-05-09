@@ -2,13 +2,15 @@
 import UIKit
 
 protocol ViewControllerCustomDelegate: AnyObject {
-    func numberFact(fact: String)
+//    func numberFact(fact: String)
     func factAbout(number: Int)
 }
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    var networkDataFetcher = NetworkDataFetcher()
+    
+    
+//    public var completionHandler:((Int?) -> Void)
     
     weak var delegate: ViewControllerCustomDelegate? // FactViewController
     
@@ -101,6 +103,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         setupViews()
         setupConstraints()
         displayFactButton.addTarget(self, action: #selector(displayFactButtonIsPressed), for: .touchUpInside)
+//        if ((enterHereTextField.text?.isEmpty) != nil) {
+//            displayFactButton.isUserInteractionEnabled = false
+//        }
         userNumberButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped(gestureRecognizer:)))
         view.addGestureRecognizer(tapRecognizer)
@@ -116,15 +121,24 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         sender.setTitleColor(.white, for: .normal)
     }
     @objc func displayFactButtonIsPressed(sender: UIButton!) {
-        let navController = UINavigationController(rootViewController: FactViewController())
         
-        self.networkDataFetcher.fetchFacts(number: enterHereTextField.text ?? "", type: "math") { [weak self] (result) in
+        enterHereTextField.resignFirstResponder()
+        if let text = enterHereTextField.text,
+           let textToNumber = Int(text) {
             DispatchQueue.main.async {
-                self?.delegate?.numberFact(fact: result?.text ?? "")
-                self?.delegate?.factAbout(number: result?.number ?? 0)
+                self.delegate?.factAbout(number: textToNumber)
             }
         }
-        enterHereTextField.resignFirstResponder()
+        
+
+//        self.networkDataFetcher.fetchFacts(number: enterHereTextField.text ?? "", type: "math") { [weak self] (result) in
+//            DispatchQueue.main.async {
+//                self?.delegate?.numberFact(fact: result?.text ?? "")
+//                self?.delegate?.factAbout(number: result?.number ?? 0)
+//            }
+//        }
+        let navController = UINavigationController(rootViewController: FactViewController())
+        
         self.present(navController, animated: true, completion: nil)
     }
     
