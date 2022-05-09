@@ -4,7 +4,8 @@ import UIKit
 
 class FactViewController: UIViewController, ViewControllerCustomDelegate {
     
-    var networkDataFetcher = NetworkDataFetcher()
+    let networkDataFetcher = NetworkDataFetcher()
+    let vc = ViewController()
     
 //    var fetchedNumber: Int?
 
@@ -60,7 +61,8 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        self.networkDataFetcher.fetchFacts(number: numberLabel.text ?? "0", type: "math") { (result) in
+        vc.delegate = self
+        self.networkDataFetcher.fetchFacts(number: numberLabel.text ?? "3", type: "math") { (result) in
             self.factLabel.text = result?.text
         }
     }

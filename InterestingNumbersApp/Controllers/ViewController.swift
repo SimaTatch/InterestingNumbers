@@ -120,8 +120,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         sender.backgroundColor = .specialPurple
         sender.setTitleColor(.white, for: .normal)
     }
+    
     @objc func displayFactButtonIsPressed(sender: UIButton!) {
-        
         enterHereTextField.resignFirstResponder()
         if let text = enterHereTextField.text,
            let textToNumber = Int(text) {
