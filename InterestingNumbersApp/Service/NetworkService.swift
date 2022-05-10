@@ -21,23 +21,3 @@ class NetworkService {
     }
 }
 
-
-
-
-//
-//func request(searchTerm: String, completion: @escaping (Data?, Error?) -> Void ) {
-//    let parameters = self.prepareParams(searchTerm: searchTerm)
-//    let url = self.createUrl(params: parameters)
-//    var request = URLRequest(url: url)
-//    request.allHTTPHeaderFields = prepareHeader()
-//    request.httpMethod = "GET"
-//    let task = createDataTask(from: request, completion: completion)
-//    task.resume()
-//}
-//
-//private func createDataTask(from request: URLRequest, completion: @escaping (Data?, Error?) ->  Void) -> URLSessionDataTask {
-//    return URLSession.shared.dataTask(with: request) { (data, response, error) in
-//        DispatchQueue.main.async {
-//            completion(data, error)
-//        }
-//    }

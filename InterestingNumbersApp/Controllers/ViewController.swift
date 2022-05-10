@@ -1,19 +1,9 @@
 
 import UIKit
 
-protocol ViewControllerCustomDelegate: AnyObject {
-//    func numberFact(fact: String)
-    func factAbout(number: Int)
-}
-
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
-    
-    
-    
-//    public var completionHandler:((Int?) -> Void)
-    
-    weak var delegate: ViewControllerCustomDelegate? // FactViewController
-    
+  
+
 //    MARK: - SetupUIs
     private let interestingNumbersLabel: UILabel = {
         let label = UILabel()
@@ -48,21 +38,41 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return imageView
     }()
     
+    
+    
     private let userNumberButton: UIButton = {
         let button = UIButton()
         button.setTitle("User number", for: .normal)
-        button.titleLabel?.font = .openSansSemiBold13()
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .specialBackground
-        button.titleLabel?.numberOfLines = 2
-        button.layer.cornerRadius = 6
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.specialBoarderColor.cgColor
         button.addShadowOnView()
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setUpCustomButton()
         return button
     }()
+    
+    private let randomNumberButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Random number", for: .normal)
+        button.setUpCustomButton()
+        button.addShadowOnView()
+        return button
+    }()
+    
+    private let numberInRangeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Number in a range", for: .normal)
+        button.setUpCustomButton()
+        button.addShadowOnView()
+        return button
+    }()
+    
+    private let multiplyNumbersButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Multiple numbers", for: .normal)
+        button.setUpCustomButton()
+        button.addShadowOnView()
+        return button
+    }()
+    
+    
     
     private let enterHereLabel: UILabel = {
         let label = UILabel()
@@ -102,11 +112,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        enterHereTextField.delegate = self
+
         displayFactButton.addTarget(self, action: #selector(displayFactButtonIsPressed), for: .touchUpInside)
-//        if ((enterHereTextField.text?.isEmpty) != nil) {
-//            displayFactButton.isUserInteractionEnabled = false
-//        }
         userNumberButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        multiplyNumbersButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        randomNumberButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        numberInRangeButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped(gestureRecognizer:)))
         view.addGestureRecognizer(tapRecognizer)
         tapRecognizer.delegate = self
@@ -114,21 +127,73 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
 //    MARK: - Objective-c funcs
     @objc func tapped(gestureRecognizer: UIGestureRecognizer) {
-        refreshButtonState()
+        deselectAllButtons()
     }
-    @objc func buttonIsPressed(sender: UIButton!) {
+
+    @objc func buttonIsPressed(sender: UIButton) {
+        deselectAllButtons()
+        
+        sender.isSelected = true
         sender.backgroundColor = .specialPurple
         sender.setTitleColor(.white, for: .normal)
+        
+        enterHereTextField.placeholder = ""
+        enterHereTextField.isEnabled = true
+        enterHereTextField.becomeFirstResponder()
+        
+        switch sender {
+        case userNumberButton:
+            enterHereTextField.placeholder = "date(ex:4/20) or number(42)"
+        case randomNumberButton:
+            enterHereTextField.isEnabled = false
+            enterHereTextField.placeholder = "random"
+        case numberInRangeButton:
+            enterHereTextField.placeholder = "ex: 1..3"
+        default:
+            break
+        }
+
     }
     
     @objc func displayFactButtonIsPressed(sender: UIButton!) {
-        enterHereTextField.resignFirstResponder()
-        if let text = enterHereTextField.text,
-           let textToNumber = Int(text) {
-            DispatchQueue.main.async {
-                self.delegate?.factAbout(number: textToNumber)
+            
+            enterHereTextField.resignFirstResponder()
+        
+            let detailVC = FactViewController()
+            let navigationController = UINavigationController(rootViewController: detailVC)
+        
+            detailVC.numberFromTextField = enterHereTextField.text ?? ""
+        
+            switch true{
+            case multiplyNumbersButton.isSelected:
+                detailVC.type = "math"
+            default:
+                break
             }
-        }
+       
+        
+        navigationController.modalPresentationStyle = .pageSheet
+        present(navigationController, animated: true)
+    }
+
+        
+        
+ //        let factViewController = FactViewController()
+ //        factViewController.numberLabel.text = enterHereTextField.text ?? "0"
+ //        factViewController.modalPresentationStyle = .pageSheet
+ //        self.navigationController?.pushViewController(factViewController, animated: true)
+         
+         
+//        completionHandler?(enterHereTextField.text)
+        
+        
+//        if let text = enterHereTextField.text,
+//           let textToNumber = Int(text) {
+//            DispatchQueue.main.async {
+//                
+//                self.delegate?.factAbout(number: textToNumber)
+//            }
+//        }
         
 
 //        self.networkDataFetcher.fetchFacts(number: enterHereTextField.text ?? "", type: "math") { [weak self] (result) in
@@ -137,10 +202,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //                self?.delegate?.factAbout(number: result?.number ?? 0)
 //            }
 //        }
-        let navController = UINavigationController(rootViewController: FactViewController())
         
-        self.present(navController, animated: true, completion: nil)
-    }
+//        let navController = UINavigationController(rootViewController: FactViewController())
+//        self.present(navController, animated: true, completion: nil)
+    
     
     
 //    MARK: - Private funcs
@@ -153,18 +218,30 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(enterHereLabel)
         view.addSubview(enterHereTextField)
         view.addSubview(displayFactButton)
+        view.addSubview(randomNumberButton)
+        view.addSubview(multiplyNumbersButton)
+        view.addSubview(numberInRangeButton)
     }
     
-    private func refreshButtonState() {
-        userNumberButton.backgroundColor = .specialBackground
-        userNumberButton.setTitleColor(.black, for: .normal)
+    private func deselectAllButtons(){
         enterHereTextField.resignFirstResponder()
+        enterHereTextField.placeholder = ""
+        for subView in view.subviews
+          {
+            if let button = subView as? UIButton, button != displayFactButton {
+                button.isSelected = false
+                button.backgroundColor = .specialBackground
+                button.setTitleColor(.black, for: .normal)
+                enterHereTextField.text = ""
+
+            }
+        }
     }
 }
 
 extension ViewController {
     
-//    MARK: - SetupConstraints
+    //    MARK: - SetupConstraints
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
@@ -195,6 +272,28 @@ extension ViewController {
         ])
         
         NSLayoutConstraint.activate([
+            randomNumberButton.widthAnchor.constraint(equalToConstant: 75),
+            randomNumberButton.heightAnchor.constraint(equalToConstant: 74),
+            randomNumberButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 103),
+            randomNumberButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 486)
+        ])
+
+        NSLayoutConstraint.activate([
+            numberInRangeButton.widthAnchor.constraint(equalToConstant: 75),
+            numberInRangeButton.heightAnchor.constraint(equalToConstant: 74),
+            numberInRangeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 187),
+            numberInRangeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 486)
+        ])
+
+        NSLayoutConstraint.activate([
+            multiplyNumbersButton.widthAnchor.constraint(equalToConstant: 75),
+            multiplyNumbersButton.heightAnchor.constraint(equalToConstant: 74),
+            multiplyNumbersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 271),
+            multiplyNumbersButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 486)
+        ])
+
+        
+        NSLayoutConstraint.activate([
             enterHereLabel.widthAnchor.constraint(equalToConstant: 79),
             enterHereLabel.heightAnchor.constraint(equalToConstant: 21),
             enterHereLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
@@ -202,19 +301,36 @@ extension ViewController {
         ])
         
         NSLayoutConstraint.activate([
-            enterHereTextField.widthAnchor.constraint(equalToConstant: 343),
+//            enterHereTextField.widthAnchor.constraint(equalToConstant: 343),
             enterHereTextField.heightAnchor.constraint(equalToConstant: 44),
             enterHereTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            enterHereTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             enterHereTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 606)
         ])
         
         NSLayoutConstraint.activate([
-            displayFactButton.widthAnchor.constraint(equalToConstant: 343),
+//            displayFactButton.widthAnchor.constraint(equalToConstant: 343),
             displayFactButton.heightAnchor.constraint(equalToConstant: 52),
             displayFactButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            displayFactButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             displayFactButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 670)
         ])
     }
 }
 
+extension ViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        
+        guard string != "" else {return true}
+        return onlyNums(string: string)
+    }
+    
+    func onlyNums(string: String) -> Bool {
+        let leftSideField = CharacterSet(charactersIn: "0123456789./")
+        let rightSideField = CharacterSet(charactersIn: string)
+        return leftSideField.isSuperset(of: rightSideField)
+    }
+}
 

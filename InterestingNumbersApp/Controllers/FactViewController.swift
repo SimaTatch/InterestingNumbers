@@ -2,25 +2,16 @@
 import Foundation
 import UIKit
 
-class FactViewController: UIViewController, ViewControllerCustomDelegate {
+class FactViewController: UIViewController{
     
     let networkDataFetcher = NetworkDataFetcher()
-    let vc = ViewController()
+    var numberFromTextField = ""
+    var type = ""
     
-//    var fetchedNumber: Int?
-
-    
-    //    MARK: - Conformity to protocol
-    func factAbout(number: Int) {
-        DispatchQueue.main.async {
-            self.numberLabel.text = String(number)
-        }
-    }
     
     //    MARK: - SetupUIs
-    private let numberLabel: UILabel = {
+    let numberLabel: UILabel = {
         let label = UILabel()
-        //        label.text = "100000"
         label.textAlignment = .center
         label.font = .openSansBold28()
         label.textColor = .white
@@ -35,7 +26,6 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
     
     private let factLabel: UILabel = {
         let label = UILabel()
-        //        label.text = "The word \"hundred\" is actually derived from the Old Norse word \"hundrath,\" which actually means 120, not 100. More specifically, \"hundrath,\" in Old Norse, means \"long hundred,\" which equals 120, due to the duodecimal system. But good luck trying to argue that your $100 bill is worth 20 percent more than it is."
         label.font = .openSansSemiBold16()
         label.textAlignment = .center
         label.textColor = .white
@@ -50,7 +40,6 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
     private let exitButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "close"), for: .normal)
-        //        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(exitButtonIsPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -61,9 +50,19 @@ class FactViewController: UIViewController, ViewControllerCustomDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        vc.delegate = self
-        self.networkDataFetcher.fetchFacts(number: numberLabel.text ?? "3", type: "math") { (result) in
-            self.factLabel.text = result?.text
+        if numberFromTextField == "" {
+            numberFromTextField = "random"
+        }
+        DispatchQueue.main.async { [self] in
+            self.networkDataFetcher.fetchFacts(number: numberFromTextField, type: type) { (result) in
+                print("type:\(type)")
+                print("number:\(String(describing:numberFromTextField))")
+                
+                if let num = result?.number {
+                    self.numberLabel.text = String(num)
+                }
+                self.factLabel.text = result?.text
+            }
         }
     }
     
@@ -95,9 +94,10 @@ extension FactViewController {
         ])
         
         NSLayoutConstraint.activate([
-            numberLabel.widthAnchor.constraint(equalToConstant: 48),
+//            numberLabel.widthAnchor.constraint(equalToConstant: 58),
+            numberLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             numberLabel.heightAnchor.constraint(equalToConstant: 38),
-            numberLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 163),
+            numberLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             numberLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 88)
         ])
         

@@ -6,12 +6,14 @@ struct SearchResults: Decodable {
 }
 
 struct SearchResultsDateJSON: Decodable {
-//    let date: String?
-    let text: String
-//    let year: Int?
-    let number: Int
-    let found: Bool
-    let type: String
+    let text: String?
+    let number: Int?
+    let found: Bool?
+    let type: String?
+    let rangeResult: [String: String]?
 }
+
+
+
 
 
