@@ -143,7 +143,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         switch sender {
         case userNumberButton:
-            enterHereTextField.placeholder = "date(ex:4/20) or number(42)"
+            enterHereTextField.placeholder = "ex: a date(ex:4/20) or a number(42)"
         case randomNumberButton:
             enterHereTextField.isEnabled = false
             enterHereTextField.placeholder = "random"
@@ -164,49 +164,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
             detailVC.numberFromTextField = enterHereTextField.text ?? ""
         
-            switch true{
-            case multiplyNumbersButton.isSelected:
-                detailVC.type = "math"
-            default:
-                break
-            }
+//            switch true{
+//            case multiplyNumbersButton.isSelected:
+//                detailVC.type = "math"
+//            default:
+//                break
+//            }
        
         
         navigationController.modalPresentationStyle = .pageSheet
         present(navigationController, animated: true)
     }
-
-        
-        
- //        let factViewController = FactViewController()
- //        factViewController.numberLabel.text = enterHereTextField.text ?? "0"
- //        factViewController.modalPresentationStyle = .pageSheet
- //        self.navigationController?.pushViewController(factViewController, animated: true)
-         
-         
-//        completionHandler?(enterHereTextField.text)
-        
-        
-//        if let text = enterHereTextField.text,
-//           let textToNumber = Int(text) {
-//            DispatchQueue.main.async {
-//                
-//                self.delegate?.factAbout(number: textToNumber)
-//            }
-//        }
-        
-
-//        self.networkDataFetcher.fetchFacts(number: enterHereTextField.text ?? "", type: "math") { [weak self] (result) in
-//            DispatchQueue.main.async {
-//                self?.delegate?.numberFact(fact: result?.text ?? "")
-//                self?.delegate?.factAbout(number: result?.number ?? 0)
-//            }
-//        }
-        
-//        let navController = UINavigationController(rootViewController: FactViewController())
-//        self.present(navController, animated: true, completion: nil)
-    
-    
     
 //    MARK: - Private funcs
     private func setupViews() {
@@ -321,16 +289,36 @@ extension ViewController {
 extension ViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        
         guard string != "" else {return true}
-        return onlyNums(string: string)
+        return shoudAddCharecterToDashField(string: string, previousText: enterHereTextField.text)
     }
     
-    func onlyNums(string: String) -> Bool {
-        let leftSideField = CharacterSet(charactersIn: "0123456789./")
-        let rightSideField = CharacterSet(charactersIn: string)
-        return leftSideField.isSuperset(of: rightSideField)
+    func shoudAddCharecterToDashField(string: String, previousText: String?) -> Bool {
+        
+        let containsDot = previousText?.contains(".") ?? false
+        let containsComma = previousText?.contains(",") ?? false
+        let containsDots = previousText?.contains("..") ?? false
+        let containsDash = previousText?.contains("/") ?? false
+        if previousText != "" { //already have text
+            if ((!containsDots && string == ".") || (!containsDash && string == "/"))
+                && ((!containsDash && string == ".") || (!containsDots && string == "/")) {
+                return true
+            }
+            if (!containsDash && string == ",") && (!containsDot && string == ",") && (!containsComma && string == ","){
+                return true
+            }
+            if string.count == 1 { // entering throught keyboard
+                if let inputCh = string.last {
+                    return inputCh.isNumber
+                }
+            } else { // paste
+                return true
+            }
+        } else {
+            return string.last?.isNumber ?? true
+        }
+        return true
     }
 }
+
 

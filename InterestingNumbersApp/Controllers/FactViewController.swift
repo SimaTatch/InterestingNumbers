@@ -53,15 +53,40 @@ class FactViewController: UIViewController{
         if numberFromTextField == "" {
             numberFromTextField = "random"
         }
+        
+        //        MARK: - Eсли пользователь вводит диапазон чисел или пару чисел
+        if numberFromTextField.contains("..") || numberFromTextField.contains(",") {
+            self.networkDataFetcher.fetchRange(number: numberFromTextField, type: "") { (result) in
+                if let currentNumb = result?.number {
+                    self.numberLabel.text = currentNumb
+                } else {
+                    self.numberLabel.text = "🥲"
+                }
+                if let currentValue = result?.value {
+                    self.factLabel.text = currentValue
+                } else {
+                    self.factLabel.text = "Something went wrong.\n Please, try a different number/date format."
+                }
+            }
+        }
+        
+        
+        //        MARK: - Eсли пользователь вводит дату или число
         DispatchQueue.main.async { [self] in
             self.networkDataFetcher.fetchFacts(number: numberFromTextField, type: type) { (result) in
                 print("type:\(type)")
                 print("number:\(String(describing:numberFromTextField))")
                 
-                if let num = result?.number {
-                    self.numberLabel.text = String(num)
+                if let currentNum = result?.number {
+                    self.numberLabel.text = String(currentNum)
+                } else {
+                    self.numberLabel.text = "🥲"
                 }
-                self.factLabel.text = result?.text
+                if let currentLabel = result?.text {
+                    self.factLabel.text = currentLabel
+                } else {
+                    self.factLabel.text = "Something went wrong.\n Please, try a different number/date format."
+                }
             }
         }
     }
@@ -94,7 +119,7 @@ extension FactViewController {
         ])
         
         NSLayoutConstraint.activate([
-//            numberLabel.widthAnchor.constraint(equalToConstant: 58),
+            //            numberLabel.widthAnchor.constraint(equalToConstant: 58),
             numberLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             numberLabel.heightAnchor.constraint(equalToConstant: 38),
             numberLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
