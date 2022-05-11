@@ -1,10 +1,7 @@
 
 import Foundation
 
-//struct SearchResults: Decodable {
-//    let resultString: String
-//}
-
+//MARK: - Cтруктура для чисел и дат
 struct SearchResultsDateJSON: Decodable {
     let text: String?
     let number: Int?
@@ -15,7 +12,7 @@ struct SearchResultsDateJSON: Decodable {
 
 //работа идет между 3 файлами (этот, NetworkDataFetcher(func fetchRange) и FactViewController (строчка 57))
 
-// MARK: - попытка 1(вставить в NetworkDataFetcher в FetchRange название этой структуры )
+// MARK: - Структура для диапазонов, попытка 1, выдает рандомную пару число-факт из диапазона а не весь диапазон
 
 struct SearchResultsRangeJSON: Decodable {
     typealias DestinationNumber = String
@@ -34,7 +31,7 @@ struct SearchResultsRangeJSON: Decodable {
     }
 }
 
-// MARK: - попытка 2 (вставить в NetworkDataFetcher в FetchRange название этой структуры )
+// MARK: - попытка 2, ничего не выдает  (вставить в NetworkDataFetcher в FetchRange название этой структуры )
 
 //struct DecodedArray: Decodable {
 //    var array: [NumberFacts2]
