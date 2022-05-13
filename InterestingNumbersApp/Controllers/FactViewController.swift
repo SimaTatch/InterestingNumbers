@@ -8,7 +8,6 @@ class FactViewController: UIViewController{
     var numberFromTextField = ""
     var type = ""
     
-    
     //    MARK: - SetupUIs
     let numberLabel: UILabel = {
         let label = UILabel()
@@ -23,11 +22,10 @@ class FactViewController: UIViewController{
         return label
     }()
     
-    
     private let factLabel: UILabel = {
         let label = UILabel()
         label.font = .openSansSemiBold16()
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.textColor = .white
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -45,6 +43,15 @@ class FactViewController: UIViewController{
         return button
     }()
     
+    private let labelAndTextFieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = NSLayoutConstraint.Axis.vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 10.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     //    MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,35 +64,38 @@ class FactViewController: UIViewController{
         //        MARK: - Eсли пользователь вводит диапазон чисел или пару чисел
         if numberFromTextField.contains("..") || numberFromTextField.contains(",") {
             self.networkDataFetcher.fetchRange(number: numberFromTextField, type: "") { (result) in
-                if let currentNumb = result?.number {
+                let sortedResult = result?.sorted(by: { lhs, rhs in
+                    lhs.key < rhs.key })
+                let keys = sortedResult?.map({$0.key}).joined(separator: ",")
+                let resultString = sortedResult?.map({$0.value}).joined(separator: ",\n")
+                if let currentNumb = keys {
                     self.numberLabel.text = currentNumb
                 } else {
                     self.numberLabel.text = "🥲"
                 }
-                if let currentValue = result?.value {
+                if let currentValue = resultString {
                     self.factLabel.text = currentValue
                 } else {
                     self.factLabel.text = "Something went wrong.\n Please, try a different number/date format."
                 }
             }
+            return
         }
         
-        
         //        MARK: - Eсли пользователь вводит дату или число
-        DispatchQueue.main.async { [self] in
-            self.networkDataFetcher.fetchFacts(number: numberFromTextField, type: type) { (result) in
-                print("type:\(type)")
-                print("number:\(String(describing:numberFromTextField))")
-                
-                if let currentNum = result?.number {
-                    self.numberLabel.text = String(currentNum)
-                } else {
-                    self.numberLabel.text = "🥲"
-                }
-                if let currentLabel = result?.text {
-                    self.factLabel.text = currentLabel
-                } else {
+        self.networkDataFetcher.fetchFacts(number: numberFromTextField, type: type) { result in
+            DispatchQueue.main.async {
+                print("type:\(self.type)")
+                print("number:\(String(describing:self.numberFromTextField))")
+                switch result {
+                case .Success(let success):
+                    self.numberLabel.text = String(describing:success.number!)
+                    self.factLabel.text = success.text
+                case .Error(let _):
+                    self.numberLabel.text =  "🥲"
                     self.factLabel.text = "Something went wrong.\n Please, try a different number/date format."
+                default:
+                    break
                 }
             }
         }
@@ -102,6 +112,10 @@ class FactViewController: UIViewController{
         view.addSubview(factLabel)
         view.addSubview(numberLabel)
         view.addSubview(exitButton)
+        view.addSubview(labelAndTextFieldStackView)
+        
+        labelAndTextFieldStackView.addArrangedSubview(numberLabel)
+        labelAndTextFieldStackView.addArrangedSubview(factLabel)
     }
 }
 
@@ -112,18 +126,17 @@ extension FactViewController {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            factLabel.widthAnchor.constraint(equalToConstant: 327),
-            factLabel.heightAnchor.constraint(equalToConstant: 238),
-            factLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            factLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150)
+            factLabel.heightAnchor.constraint(equalToConstant: 290)
         ])
         
         NSLayoutConstraint.activate([
-            //            numberLabel.widthAnchor.constraint(equalToConstant: 58),
-            numberLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            numberLabel.heightAnchor.constraint(equalToConstant: 38),
-            numberLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            numberLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 88)
+            numberLabel.heightAnchor.constraint(equalToConstant: 38)
+        ])
+        
+        NSLayoutConstraint.activate([
+            labelAndTextFieldStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 88),
+            labelAndTextFieldStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            labelAndTextFieldStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
         NSLayoutConstraint.activate([
@@ -134,3 +147,6 @@ extension FactViewController {
         ])
     }
 }
+
+
+

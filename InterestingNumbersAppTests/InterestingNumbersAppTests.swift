@@ -1,36 +1,40 @@
-//
-//  InterestingNumbersAppTests.swift
-//  InterestingNumbersAppTests
-//
-//  Created by Серафима  Татченкова  on 07.05.2022.
-//
 
 import XCTest
 @testable import InterestingNumbersApp
 
 class InterestingNumbersAppTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    private let service = NetworkDataFetcher()
+    
+    
+    func testErrorJSON() {
+        let data = "Just a plain error".data(using: String.Encoding.utf8)!
+        guard case .Error = service.decodeJSON(type: SearchResultsDateJSON.self, from: data) else {
+            XCTFail("Couldn't recognize malformed JSON response")
+            return
         }
     }
-
+    
+    func testSuccessJSON() {
+        let data =  " { \"text\": \"231 is the number of cubic inches in a U.S. liquid gallon.\", \"number\": 231, \"found\": true, \"type\": \"trivia\" }".data(using: String.Encoding.utf8)!
+        guard case let .Success(conditions) = service.decodeJSON(type: SearchResultsDateJSON.self, from: data) else {
+            return
+        }
+        XCTAssertEqual("231 is the number of cubic inches in a U.S. liquid gallon.", conditions.text )
+        XCTAssertEqual(nil, conditions.year)
+        XCTAssertEqual(231, conditions.number)
+        XCTAssertEqual(true, conditions.found)
+        XCTAssertEqual("trivia", conditions.type)
+    }
+    
+    func testParseJsonWithoutExpectedValues() {
+        let data = "{ \"foo\": 42.0, \"main\": \"hello\" }".data(using: String.Encoding.utf8)!
+        guard case .Error = service.decodeJSON(type: SearchResultsDateJSON.self, from: data) else {
+            XCTFail("Couldn't recognize malformed JSON response")
+            return
+        }
+    }
+    
+    
+    
 }

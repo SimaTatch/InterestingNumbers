@@ -34,7 +34,6 @@
 		9261790C2827D19600F2206C /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261790B2827D19600F2206C /* SearchResults.swift */; };
 		9261790E2827E11900F2206C /* FactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261790D2827E11900F2206C /* FactViewController.swift */; };
 		926179112827F9B600F2206C /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926179102827F9B600F2206C /* NetworkDataFetcher.swift */; };
-		9261791628296CA800F2206C /* FetchedNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261791528296CA800F2206C /* FetchedNumber.swift */; };
 		926179182829A53400F2206C /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926179172829A53400F2206C /* UIButton+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +86,6 @@
 		9261790B2827D19600F2206C /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		9261790D2827E11900F2206C /* FactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactViewController.swift; sourceTree = "<group>"; };
 		926179102827F9B600F2206C /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
-		9261791528296CA800F2206C /* FetchedNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedNumber.swift; sourceTree = "<group>"; };
 		926179172829A53400F2206C /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				9261790B2827D19600F2206C /* SearchResults.swift */,
-				9261791528296CA800F2206C /* FetchedNumber.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -379,7 +376,6 @@
 				926179062826E61D00F2206C /* UIFont+Extension.swift in Sources */,
 				9261790828272BE300F2206C /* NetworkService.swift in Sources */,
 				9261790C2827D19600F2206C /* SearchResults.swift in Sources */,
-				9261791628296CA800F2206C /* FetchedNumber.swift in Sources */,
 				926179042826E52800F2206C /* UIColor+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

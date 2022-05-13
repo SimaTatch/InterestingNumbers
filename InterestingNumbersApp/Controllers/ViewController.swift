@@ -2,9 +2,9 @@
 import UIKit
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
-  
-
-//    MARK: - SetupUIs
+    
+    
+    //MARK: - Labels
     private let interestingNumbersLabel: UILabel = {
         let label = UILabel()
         label.text = "Interesting numbers"
@@ -30,6 +30,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return label
     }()
     
+    private let enterHereLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Enter here"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: - Image
     private let diceImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "bg image")
@@ -38,11 +48,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return imageView
     }()
     
-    
-    
+    // MARK: - Buttons
     private let userNumberButton: UIButton = {
         let button = UIButton()
-        button.setTitle("User number", for: .normal)
+        button.setTitle("User\n number", for: .normal)
         button.addShadowOnView()
         button.setUpCustomButton()
         return button
@@ -72,29 +81,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return button
     }()
     
-    
-    
-    private let enterHereLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Enter here"
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let enterHereTextField: UITextField = {
-        let textField = UITextField()
-        textField .frame = CGRect(x: 0, y: 0, width: 343, height: 44)
-        textField .backgroundColor = .white
-        textField .layer.backgroundColor = UIColor.specialMagnolia.cgColor
-        textField .layer.cornerRadius = 6
-        textField .layer.borderWidth = 1
-        textField .layer.borderColor = UIColor.specialBoarderColor.cgColor
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
     private let displayFactButton: UIButton = {
         let button = UIButton()
         button.setTitle("Display Fact", for: .normal)
@@ -107,13 +93,56 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return button
     }()
     
-//    MARK: - viewDidLoad()
+    //MARK: - TextField
+    private let enterHereTextField: UITextField = {
+        let textField = UITextField()
+        textField .frame = CGRect(x: 0, y: 0, width: 343, height: 44)
+        textField .backgroundColor = .white
+        textField .layer.backgroundColor = UIColor.specialMagnolia.cgColor
+        textField .layer.cornerRadius = 6
+        textField .layer.borderWidth = 1
+        textField .layer.borderColor = UIColor.specialBoarderColor.cgColor
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    // MARK: - StackViews
+    private let buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = NSLayoutConstraint.Axis.horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 9.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let labelAndTextFieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = NSLayoutConstraint.Axis.vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 3.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let commonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = NSLayoutConstraint.Axis.vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 15.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    //    MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        addSubviews()
         setupConstraints()
         enterHereTextField.delegate = self
-
+        
         displayFactButton.addTarget(self, action: #selector(displayFactButtonIsPressed), for: .touchUpInside)
         userNumberButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
         multiplyNumbersButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
@@ -125,11 +154,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         tapRecognizer.delegate = self
     }
     
-//    MARK: - Objective-c funcs
+    //    MARK: - Objective-c funcs
     @objc func tapped(gestureRecognizer: UIGestureRecognizer) {
         deselectAllButtons()
     }
-
+    
     @objc func buttonIsPressed(sender: UIButton) {
         deselectAllButtons()
         
@@ -143,7 +172,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         switch sender {
         case userNumberButton:
-            enterHereTextField.placeholder = "ex: a date(ex:4/20) or a number(42)"
+            enterHereTextField.placeholder = "ex: a date(4/20) or a number(42)"
         case randomNumberButton:
             enterHereTextField.isEnabled = false
             enterHereTextField.placeholder = "random"
@@ -152,31 +181,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         default:
             break
         }
-
     }
     
     @objc func displayFactButtonIsPressed(sender: UIButton!) {
-            
-            enterHereTextField.resignFirstResponder()
+        enterHereTextField.resignFirstResponder()
         
-            let detailVC = FactViewController()
-            let navigationController = UINavigationController(rootViewController: detailVC)
+        let detailVC = FactViewController()
+        let navigationController = UINavigationController(rootViewController: detailVC)
         
-            detailVC.numberFromTextField = enterHereTextField.text ?? ""
-        
-//            switch true{
-//            case multiplyNumbersButton.isSelected:
-//                detailVC.type = "math"
-//            default:
-//                break
-//            }
-       
+        detailVC.numberFromTextField = enterHereTextField.text ?? ""
         
         navigationController.modalPresentationStyle = .pageSheet
         present(navigationController, animated: true)
     }
     
-//    MARK: - Private funcs
+    //    MARK: - Private funcs
     private func setupViews() {
         view.backgroundColor = .specialBackground
         view.addSubview(interestingNumbersLabel)
@@ -189,19 +208,35 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(randomNumberButton)
         view.addSubview(multiplyNumbersButton)
         view.addSubview(numberInRangeButton)
+        view.addSubview(buttonsStackView)
+        view.addSubview(labelAndTextFieldStackView)
+        view.addSubview(commonStackView)
+    }
+    
+    private func addSubviews() {
+        buttonsStackView.addArrangedSubview(userNumberButton)
+        buttonsStackView.addArrangedSubview(multiplyNumbersButton)
+        buttonsStackView.addArrangedSubview(randomNumberButton)
+        buttonsStackView.addArrangedSubview(numberInRangeButton)
+        
+        labelAndTextFieldStackView.addArrangedSubview(enterHereLabel)
+        labelAndTextFieldStackView.addArrangedSubview(enterHereTextField)
+        
+        commonStackView.addArrangedSubview(buttonsStackView)
+        commonStackView.addArrangedSubview(labelAndTextFieldStackView)
+        commonStackView.addArrangedSubview(displayFactButton)
     }
     
     private func deselectAllButtons(){
         enterHereTextField.resignFirstResponder()
         enterHereTextField.placeholder = ""
-        for subView in view.subviews
-          {
+        for subView in buttonsStackView.arrangedSubviews
+        {
             if let button = subView as? UIButton, button != displayFactButton {
                 button.isSelected = false
                 button.backgroundColor = .specialBackground
                 button.setTitleColor(.black, for: .normal)
                 enterHereTextField.text = ""
-
             }
         }
     }
@@ -233,55 +268,46 @@ extension ViewController {
         ])
         
         NSLayoutConstraint.activate([
-            userNumberButton.widthAnchor.constraint(equalToConstant: 75),
-            userNumberButton.heightAnchor.constraint(equalToConstant: 74),
-            userNumberButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
-            userNumberButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 486)
+            userNumberButton.widthAnchor.constraint(equalToConstant: self.view.frame.width / 4),
+            userNumberButton.heightAnchor.constraint(equalToConstant: self.view.frame.height / 4)
         ])
         
         NSLayoutConstraint.activate([
-            randomNumberButton.widthAnchor.constraint(equalToConstant: 75),
-            randomNumberButton.heightAnchor.constraint(equalToConstant: 74),
-            randomNumberButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 103),
-            randomNumberButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 486)
-        ])
-
-        NSLayoutConstraint.activate([
-            numberInRangeButton.widthAnchor.constraint(equalToConstant: 75),
-            numberInRangeButton.heightAnchor.constraint(equalToConstant: 74),
-            numberInRangeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 187),
-            numberInRangeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 486)
-        ])
-
-        NSLayoutConstraint.activate([
-            multiplyNumbersButton.widthAnchor.constraint(equalToConstant: 75),
-            multiplyNumbersButton.heightAnchor.constraint(equalToConstant: 74),
-            multiplyNumbersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 271),
-            multiplyNumbersButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 486)
-        ])
-
-        
-        NSLayoutConstraint.activate([
-            enterHereLabel.widthAnchor.constraint(equalToConstant: 79),
-            enterHereLabel.heightAnchor.constraint(equalToConstant: 21),
-            enterHereLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
-            enterHereLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 580)
+            randomNumberButton.widthAnchor.constraint(equalToConstant: self.view.frame.width / 4),
+            randomNumberButton.heightAnchor.constraint(equalToConstant: self.view.frame.height / 4)
         ])
         
         NSLayoutConstraint.activate([
-//            enterHereTextField.widthAnchor.constraint(equalToConstant: 343),
-            enterHereTextField.heightAnchor.constraint(equalToConstant: 44),
-            enterHereTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            enterHereTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            enterHereTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 606)
+            numberInRangeButton.widthAnchor.constraint(equalToConstant: self.view.frame.width / 4),
+            numberInRangeButton.heightAnchor.constraint(equalToConstant: self.view.frame.height / 4)
         ])
         
         NSLayoutConstraint.activate([
-//            displayFactButton.widthAnchor.constraint(equalToConstant: 343),
-            displayFactButton.heightAnchor.constraint(equalToConstant: 52),
-            displayFactButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            displayFactButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            displayFactButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 670)
+            multiplyNumbersButton.widthAnchor.constraint(equalToConstant: self.view.frame.width / 4),
+            multiplyNumbersButton.heightAnchor.constraint(equalToConstant: self.view.frame.height / 4)
+        ])
+        
+        NSLayoutConstraint.activate([
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 74)
+        ])
+        
+        NSLayoutConstraint.activate([
+            enterHereLabel.heightAnchor.constraint(equalToConstant: 21)
+        ])
+        
+        NSLayoutConstraint.activate([
+            enterHereTextField.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        
+        NSLayoutConstraint.activate([
+            displayFactButton.heightAnchor.constraint(equalToConstant: 42),
+            displayFactButton.topAnchor.constraint(equalTo: labelAndTextFieldStackView.bottomAnchor, constant: 15)
+        ])
+        
+        NSLayoutConstraint.activate([
+            commonStackView.topAnchor.constraint(equalTo: diceImage.bottomAnchor, constant: 49),
+            commonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            commonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
 }
@@ -295,7 +321,6 @@ extension ViewController: UITextFieldDelegate {
     
     func shoudAddCharecterToDashField(string: String, previousText: String?) -> Bool {
         
-        let containsDot = previousText?.contains(".") ?? false
         let containsComma = previousText?.contains(",") ?? false
         let containsDots = previousText?.contains("..") ?? false
         let containsDash = previousText?.contains("/") ?? false
@@ -304,7 +329,7 @@ extension ViewController: UITextFieldDelegate {
                 && ((!containsDash && string == ".") || (!containsDots && string == "/")) {
                 return true
             }
-            if (!containsDash && string == ",") && (!containsDot && string == ",") && (!containsComma && string == ","){
+            if (!containsDash && string == ",") && (!containsComma && string == ","){
                 return true
             }
             if string.count == 1 { // entering throught keyboard

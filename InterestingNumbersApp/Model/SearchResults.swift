@@ -3,33 +3,42 @@ import Foundation
 
 //MARK: - Cтруктура для чисел и дат
 struct SearchResultsDateJSON: Decodable {
-    let text: String?
+    let text: String
+    let year: Int?
     let number: Int?
     let found: Bool?
     let type: String?
 //    let rangeResult: [String: String]?
+  
 }
+
+enum SearchResult {
+    case Success(SearchResultsDateJSON)
+    case Error(String)
+}
+
+
 
 //работа идет между 3 файлами (этот, NetworkDataFetcher(func fetchRange) и FactViewController (строчка 57))
 
 // MARK: - Структура для диапазонов, попытка 1, выдает рандомную пару число-факт из диапазона а не весь диапазон
 
-struct SearchResultsRangeJSON: Decodable {
-    typealias DestinationNumber = String
-
-    let number : DestinationNumber
-    let value : String
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let dict = try container.decode([String:String].self)
-        guard let key = dict.keys.first else {
-            throw NSError(domain: "Decoder", code: 0, userInfo: [:])
-        }
-        number = key
-        value = dict[key] ?? ""
-    }
-}
+//struct SearchResultsRangeJSON: Decodable {
+//    typealias DestinationNumber = String
+//
+//    let number : DestinationNumber
+//    let value : String
+//
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.singleValueContainer()
+//        let dict = try container.decode([String:String].self)
+//        guard let key = dict.keys.first else {
+//            throw NSError(domain: "Decoder", code: 0, userInfo: [:])
+//        }
+//        number = key
+//        value = dict[key] ?? ""
+//    }
+//}
 
 // MARK: - попытка 2, ничего не выдает  (вставить в NetworkDataFetcher в FetchRange название этой структуры )
 

@@ -1,16 +1,6 @@
-//
-//  UIButton+Extension.swift
-//  InterestingNumbersApp
-//
-//  Created by Серафима  Татченкова  on 09.05.2022.
-//
 
 import Foundation
 import UIKit
-
-
-
-
 
 extension UIButton {
     func setUpCustomButton() {
